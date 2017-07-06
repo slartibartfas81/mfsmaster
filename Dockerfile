@@ -1,5 +1,7 @@
 FROM alpine:latest
+LABEL maintainer="uli@bruckdorfer-sr.de"
 EXPOSE 9419 9420 9424
+
 RUN addgroup mfs && adduser -S -D -H -G mfs mfs
 RUN apk add --no-cache libgcc libstdc++ fuse
 RUN mkdir -p /usr/local/etc/mfs/ && mkdir -p /usr/local/var/lib/mfs && chown mfs:mfs /usr/local/var/lib/mfs && mkdir -p /usr/local/var/lib/mfs/
@@ -9,4 +11,11 @@ COPY mfsmaster.cfg /usr/local/etc/mfs/mfsmaster.cfg
 COPY mfsexports.cfg /usr/local/etc/mfs/mfsexports.cfg
 COPY metadata.mfs.empty /usr/local/metadata.mfs.empty
 VOLUME /usr/local/var/lib/mfs
+
+ENV MFSM_PERSONALITY master
+ENV MFSM_MASTERHOST mfsmaster
+ENV MFSM_REBAL_LABELS 1
+ENV MFSM_ACCEPT_DIFF 0.1
+
 COPY entrypoint.sh ./entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
