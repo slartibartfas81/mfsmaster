@@ -22,16 +22,6 @@ sed -i "s/^CHUNKS_REBALANCING_BETWEEN_LABELS = .\|# CHUNKS_REBALANCING_BETWEEN_L
 echo "Set acceptable difference to $MFSM_ACCEPT_DIFF"
 sed -i "s/^ACCEPTABLE_DIFFERENCE = ...\|^#.ACCEPTABLE_DIFFERENCE = .../ACCEPTABLE_DIFFERENCE = $MFSM_ACCEPT_DIFF/g" $MASTER_CFG
 
-for configFiles in $(ls /usr/local/*.cfg)
-do
-	if [ ! -f /usr/local/etc/mfs/mfsmaster.cfg ]
-	then
-		echo "copy initial $configFiles"
-		cp /usr/local/$(basename "$configFiles") /usr/local/etc/mfs/
-	fi
-done
-
-
 if [ ! -f /usr/local/var/lib/mfs/metadata.mfs ]
 then
 	echo "mfsmetadata does not exist, copy empty one"
