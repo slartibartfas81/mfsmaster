@@ -20,5 +20,6 @@ ENV MFSM_MASTERHOST mfsmaster
 ENV MFSM_REBAL_LABELS 1
 ENV MFSM_ACCEPT_DIFF 0.1
 
+RUN touch /bootstrap
 COPY entrypoint.sh ./entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
