@@ -1,6 +1,6 @@
 FROM alpine:latest
 LABEL maintainer="uli@bruckdorfer-sr.de"
-EXPOSE 9419 9420 9424
+EXPOSE 9419 9420 9421 9424
 
 RUN addgroup mfs && adduser -S -D -H -G mfs mfs
 RUN apk add --no-cache libgcc libstdc++ fuse
